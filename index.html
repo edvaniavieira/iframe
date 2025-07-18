@@ -1,0 +1,46 @@
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Site</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+            iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        </style>
+    </head>
+
+    <body onload="passIframeData()">
+
+        <script>
+        function passIframeData(){var a=document.querySelector("iframe"),e=new URL(a.src);new URL(window.location.href).searchParams.forEach(((a,r)=>e.searchParams.set(r,a))),a.src=e.href}
+        </script>
+        <script>
+        if (new URL(window.location.href).searchParams.toString() == "") {
+            
+            //recuperar os parametros do localStorage
+            const searchParams = localStorage.getItem("searchParams");
+            if (searchParams) {
+                document.querySelector("iframe").src = "https://www.rastreiologs.com/frastreio?" + searchParams;
+            }
+        }
+            else{
+                document.querySelector("iframe").src = "https://www.rastreiologs.com/frastreio";
+            
+                //armazenar no localStorage os parametros da url
+                localStorage.setItem("searchParams", new URL(window.location.href).searchParams.toString());
+
+            }
+        </script>
+        <iframe src="https://www.rastreiologs.com"></iframe>
+    </body>
+    </html>
